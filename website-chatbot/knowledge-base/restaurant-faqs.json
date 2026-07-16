@@ -1,0 +1,107 @@
+[
+  {
+    "id": "faq-001",
+    "question": "What are your opening hours?",
+    "answer": "Kalai Restaurant is open Monday to Thursday from 11:00 AM to 10:00 PM, Friday and Saturday from 11:00 AM to 11:00 PM, and Sunday from 12:00 PM to 9:00 PM. We are closed on major holidays including Christmas Day and New Year's Day.",
+    "category": "hours",
+    "tags": ["hours", "opening", "schedule", "timing", "open", "close"]
+  },
+  {
+    "id": "faq-002",
+    "question": "How do I make a reservation?",
+    "answer": "You can make a reservation in several ways: (1) Call us at +1 (555) 123-4567, (2) Use our online booking form on the website, (3) Email us at reservations@kalairestaurant.com, or (4) Walk-in (subject to availability). We recommend booking at least 24 hours in advance for weekends and 48 hours for parties of 6 or more.",
+    "category": "reservations",
+    "tags": ["reservation", "booking", "table", "book", "reserve"]
+  },
+  {
+    "id": "faq-003",
+    "question": "Do you have vegetarian and vegan options?",
+    "answer": "Yes! We have an extensive vegetarian and vegan menu. Over 40% of our dishes are plant-based. We offer vegan starters, mains, and desserts. All our vegan dishes are clearly marked with a 'V' symbol on the menu. Our kitchen uses separate preparation areas to avoid cross-contamination. Please inform your server of any dietary requirements.",
+    "category": "dietary",
+    "tags": ["vegetarian", "vegan", "plant-based", "dietary", "allergies"]
+  },
+  {
+    "id": "faq-004",
+    "question": "Do you accommodate food allergies?",
+    "answer": "Absolutely. We take food allergies very seriously. Please inform your server or mention allergies when making a reservation. We can accommodate most allergies including gluten-free, nut-free, dairy-free, shellfish-free, and more. Our staff are trained in allergen awareness. However, please note that our kitchen handles all common allergens, so we cannot guarantee a completely allergen-free environment.",
+    "category": "dietary",
+    "tags": ["allergy", "allergies", "gluten", "nut", "dairy", "shellfish", "dietary restrictions"]
+  },
+  {
+    "id": "faq-005",
+    "question": "What is your cancellation policy?",
+    "answer": "We understand plans change. Cancellations made more than 24 hours before your reservation are fully refunded if a deposit was taken. Cancellations within 24 hours may incur a £10 per person cancellation fee. For parties of 10 or more, we require 48 hours notice. No-shows will be charged the full deposit. Please call us as soon as possible if you need to cancel.",
+    "category": "reservations",
+    "tags": ["cancellation", "cancel", "refund", "deposit", "no-show", "policy"]
+  },
+  {
+    "id": "faq-006",
+    "question": "Do you offer private dining or event hosting?",
+    "answer": "Yes! We offer a beautiful private dining room that seats up to 40 guests, perfect for corporate events, birthday celebrations, weddings, anniversaries, and other special occasions. We provide customized menus, dedicated service staff, AV equipment, and floral arrangements. Contact our events team at events@kalairestaurant.com or call +1 (555) 123-4568 for package details and availability.",
+    "category": "events",
+    "tags": ["private dining", "event", "party", "corporate", "birthday", "wedding", "anniversary", "celebration"]
+  },
+  {
+    "id": "faq-007",
+    "question": "Is parking available?",
+    "answer": "Yes, we have complimentary parking available for all dining guests. Our private car park has 50 spaces and is available on a first-come, first-served basis. We also offer valet parking on Friday and Saturday evenings from 6:00 PM onwards. Street parking is also available on Main Street (free after 6:00 PM). For large groups, please notify us in advance so we can arrange dedicated parking.",
+    "category": "location",
+    "tags": ["parking", "car park", "valet", "location"]
+  },
+  {
+    "id": "faq-008",
+    "question": "Do you offer delivery or takeaway?",
+    "answer": "Yes! We offer both delivery and takeaway services. Delivery is available within a 5-mile radius through our website or via Uber Eats, DoorDash, and JustEat. Takeaway orders can be placed by calling +1 (555) 123-4567 or through our website. Delivery is available Tuesday to Sunday from 5:00 PM to 9:30 PM. Minimum order for delivery is $25. Delivery fee is $3.99 (free on orders over $50).",
+    "category": "delivery",
+    "tags": ["delivery", "takeaway", "takeout", "order", "uber eats", "doordash", "online order"]
+  },
+  {
+    "id": "faq-009",
+    "question": "Do you have a kids menu?",
+    "answer": "Absolutely! We love welcoming young diners. Our children's menu features smaller portions of popular dishes, including pasta, grilled chicken strips, fish and chips, and vegetarian options. Kids meals come with a choice of side and a soft drink for $9.99. We also provide high chairs, coloring sheets, and crayons to keep little ones entertained. Children under 3 eat for free from the kids menu.",
+    "category": "menu",
+    "tags": ["kids", "children", "family", "child menu", "high chair"]
+  },
+  {
+    "id": "faq-010",
+    "question": "What payment methods do you accept?",
+    "answer": "We accept all major credit and debit cards (Visa, MasterCard, American Express, Discover), contactless payments (Apple Pay, Google Pay, Samsung Pay), and cash. We do not accept personal checks. For large events and private dining bookings, bank transfer payments are also accepted. All prices include tax. Gratuity is not included and is at your discretion (we suggest 15-20%).",
+    "category": "payment",
+    "tags": ["payment", "credit card", "cash", "apple pay", "google pay", "tips", "gratuity"]
+  },
+  {
+    "id": "faq-011",
+    "question": "Do you have a dress code?",
+    "answer": "We maintain a smart casual dress code. We ask that guests avoid sportswear, beachwear, and overly casual attire (e.g., athletic shorts, tank tops). Smart jeans paired with a nice top or shirt are perfectly acceptable. For our special events and private dining room, we recommend smart to formal attire. We reserve the right to refuse entry to guests whose attire does not meet our standards.",
+    "category": "policies",
+    "tags": ["dress code", "attire", "clothing", "smart casual", "formal"]
+  },
+  {
+    "id": "faq-012",
+    "question": "Are you wheelchair accessible?",
+    "answer": "Yes, Kalai Restaurant is fully wheelchair accessible. We have step-free access from the street, accessible restrooms, and plenty of space between tables to accommodate wheelchairs and mobility aids. Please let us know when booking if you have accessibility requirements so we can ensure you have the best table. We also offer assistance for guests with visual or hearing impairments.",
+    "category": "accessibility",
+    "tags": ["wheelchair", "accessible", "disability", "accessibility", "mobility"]
+  },
+  {
+    "id": "faq-013",
+    "question": "Do you offer gift cards?",
+    "answer": "Yes! Kalai Restaurant gift cards make the perfect gift for any occasion. Available in denominations of $25, $50, $100, $150, and custom amounts. Purchase in person at our restaurant or online through our website. Gift cards are valid for 12 months from the date of purchase and can be used for dining in, takeaway, and private events. They cannot be redeemed for cash and are non-refundable.",
+    "category": "gifts",
+    "tags": ["gift card", "voucher", "gift", "present"]
+  },
+  {
+    "id": "faq-014",
+    "question": "How can I contact you?",
+    "answer": "You can reach us through multiple channels: Phone: +1 (555) 123-4567 (during business hours), Email: info@kalairestaurant.com, WhatsApp: +1 (555) 123-4567, Instagram: @kalairestaurant, Facebook: /kalairestaurant. Our address is 123 Main Street, Downtown District, City, State 12345. For reservations: reservations@kalairestaurant.com. For events: events@kalairestaurant.com.",
+    "category": "contact",
+    "tags": ["contact", "phone", "email", "address", "location", "social media", "whatsapp"]
+  },
+  {
+    "id": "faq-015",
+    "question": "Do you have happy hour or special offers?",
+    "answer": "Yes! We run several weekly specials: Happy Hour Monday-Friday 4:00-7:00 PM (50% off selected cocktails and $5 bar snacks), Tuesday Tasting Menu (3-course set menu for $35 per person), Thursday Live Music nights (no cover charge), Weekend Brunch Saturday-Sunday 10:00 AM-3:00 PM ($25 bottomless brunch option). Sign up to our newsletter or follow us on social media for the latest promotions.",
+    "category": "offers",
+    "tags": ["happy hour", "deals", "offers", "discounts", "specials", "promotions", "brunch", "tasting menu"]
+  }
+]

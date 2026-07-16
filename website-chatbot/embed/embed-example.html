@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalai AI Chatbot — Embed Example</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0A0A0F;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+      padding: 40px;
+    }
+    h1 { font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, #7C3AED, #A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    p { color: #888; font-size: 1.1rem; max-width: 500px; line-height: 1.6; }
+    .tag { display: inline-block; background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3); color: #A78BFA; padding: 6px 16px; border-radius: 100px; font-size: 0.85rem; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <div class="tag">✨ Embed Demo</div>
+  <h1>Kalai AI Chatbot</h1>
+  <p>
+    The chat widget is floating in the bottom-right corner. Click the purple button to open it!
+    This is how it looks embedded on any website — just two script tags.
+  </p>
+  <p style="font-size:0.85rem; color: #555;">
+    Edit <code style="color:#7C3AED">window.KalaiChat.apiUrl</code> to point to your deployed backend.
+  </p>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       EMBED CODE — Copy these 2 blocks to your website
+  ══════════════════════════════════════════════════════════════════ -->
+  <script>
+    window.KalaiChat = {
+      apiUrl: 'http://localhost:5000',        // ← Change to your API URL
+      botName: 'Kalai Assistant',
+      primaryColor: '#7C3AED',
+      welcomeMessage: 'Hi there! 👋 Welcome to Kalai Restaurant. How can I help you today?',
+      position: 'bottom-right',
+    };
+  </script>
+  <script src="chatbot-widget.js" async></script>
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

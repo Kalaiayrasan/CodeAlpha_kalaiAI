@@ -1,0 +1,71 @@
+{
+  "restaurant": "Kalai Restaurant",
+  "policies": {
+    "reservations": {
+      "title": "Reservation Policy",
+      "content": "Reservations are recommended and can be made up to 90 days in advance. Walk-ins are welcome subject to availability. We hold reserved tables for 15 minutes after the booking time before releasing them. For parties of 8 or more, a credit card is required to secure the booking. Children under 16 must be accompanied by a responsible adult.",
+      "deposit_required": "For parties of 6+, we require a $10 per person deposit at time of booking.",
+      "max_party_size_without_event_booking": 20
+    },
+    "cancellation": {
+      "title": "Cancellation & No-Show Policy",
+      "standard": "Cancel more than 24 hours before: Full refund of any deposit.",
+      "late_cancellation": "Cancel within 24 hours: $10 per person cancellation fee applies.",
+      "large_party": "For parties of 10+: 48 hours notice required for full refund.",
+      "no_show": "No-shows forfeit the full deposit amount.",
+      "contact_to_cancel": "Call +1 (555) 123-4567 or email reservations@kalairestaurant.com"
+    },
+    "dining": {
+      "title": "Dining Policies",
+      "time_limit": "Tables are allocated for up to 2 hours during peak times (Friday/Saturday evenings). Please inform us if you require longer.",
+      "outside_food": "No outside food or beverages are permitted except for celebration cakes (£15 cake-cutting fee applies).",
+      "smoking": "Kalai Restaurant is a non-smoking establishment including e-cigarettes. A designated outdoor smoking area is available.",
+      "noise_level": "We ask guests to maintain a reasonable noise level out of respect for other diners."
+    },
+    "dietary": {
+      "title": "Dietary & Allergen Policy",
+      "statement": "We take food safety and allergen management very seriously. All allergen information is available on our menu and through our staff.",
+      "allergen_disclaimer": "While we take great care, our kitchen handles the 14 major allergens. We cannot guarantee a completely allergen-free environment.",
+      "special_diets": "We cater to vegan, vegetarian, gluten-free (non-Coeliac), dairy-free, and other requirements. Please inform us when booking.",
+      "coeliac": "For those with Coeliac disease: Please speak directly with the manager so extra precautions can be taken."
+    },
+    "children": {
+      "title": "Children's Policy",
+      "welcome": "Children are warmly welcomed at Kalai Restaurant.",
+      "under_3": "Children under 3 eat free from the kids menu (1 free meal per paying adult).",
+      "high_chairs": "High chairs and booster seats are available. Please request when booking.",
+      "children_menu": "Kids menu available for children up to age 12. $9.99 includes main, side, and soft drink."
+    },
+    "payment": {
+      "title": "Payment Policy",
+      "accepted_methods": ["Visa", "MasterCard", "American Express", "Discover", "Apple Pay", "Google Pay", "Samsung Pay", "Cash"],
+      "not_accepted": ["Personal checks", "Cryptocurrency"],
+      "service_charge": "An optional 12.5% service charge is added to bills for parties of 8 or more.",
+      "gratuity_guide": "Suggested gratuity: 15% good service, 18% great service, 20% exceptional service.",
+      "split_bills": "We are happy to split bills up to 6 ways with advance notice."
+    },
+    "private_events": {
+      "title": "Private Events Policy",
+      "minimum_spend": "Private dining room: $500 minimum food spend on weekdays, $1,000 on weekends.",
+      "deposit": "25% non-refundable deposit required to secure the date.",
+      "catering": "Custom menus available. Must be confirmed 7 days before the event.",
+      "alcohol": "All alcohol must be purchased through Kalai Restaurant. No outside alcohol permitted.",
+      "av_equipment": "Projector, screen, microphone, and PA system available. AV setup fee: $50."
+    },
+    "loyalty": {
+      "title": "Kalai Loyalty Program",
+      "description": "Join our free loyalty program and earn points on every visit.",
+      "earning": "Earn 1 point for every $1 spent on food and beverages.",
+      "redemption": "100 points = $5 off your bill.",
+      "bonus": "Earn double points on your birthday month. Complimentary dessert on your birthday.",
+      "sign_up": "Sign up in restaurant, on our website, or download the Kalai app."
+    },
+    "sustainability": {
+      "title": "Our Sustainability Commitment",
+      "sourcing": "We source 80% of our produce locally within 50 miles. Our meat and fish are ethically sourced and sustainably certified.",
+      "waste": "We are committed to zero food waste. Unsold food is donated to local food banks via Too Good To Go.",
+      "packaging": "All takeaway packaging is 100% compostable or recyclable.",
+      "energy": "Our restaurant runs on 100% renewable energy and we have a 4-star Green Tourism rating."
+    }
+  }
+}

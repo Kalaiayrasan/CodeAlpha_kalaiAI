@@ -1,0 +1,202 @@
+{
+  "restaurant": "Kalai Restaurant",
+  "last_updated": "2024-01-01",
+  "currency": "USD",
+  "categories": [
+    {
+      "name": "Starters",
+      "items": [
+        {
+          "id": "s-001",
+          "name": "Crispy Calamari",
+          "description": "Lightly battered and fried squid rings served with lemon aioli and marinara sauce",
+          "price": 14.99,
+          "dietary": ["seafood"],
+          "allergens": ["gluten", "egg", "fish"],
+          "popular": true
+        },
+        {
+          "id": "s-002",
+          "name": "Burrata Caprese",
+          "description": "Creamy burrata with heirloom tomatoes, fresh basil, aged balsamic reduction, and extra virgin olive oil",
+          "price": 16.99,
+          "dietary": ["vegetarian"],
+          "allergens": ["dairy"],
+          "popular": true
+        },
+        {
+          "id": "s-003",
+          "name": "Garlic Prawn Bruschetta",
+          "description": "Sautéed king prawns in garlic butter on toasted sourdough with cherry tomatoes and fresh herbs",
+          "price": 18.99,
+          "dietary": ["seafood"],
+          "allergens": ["gluten", "shellfish", "dairy"],
+          "popular": false
+        },
+        {
+          "id": "s-004",
+          "name": "Mushroom Arancini",
+          "description": "Crispy risotto balls filled with wild mushroom and truffle, served with romesco sauce",
+          "price": 12.99,
+          "dietary": ["vegetarian"],
+          "allergens": ["gluten", "dairy", "egg"],
+          "popular": false
+        },
+        {
+          "id": "s-005",
+          "name": "Soup of the Day",
+          "description": "Chef's daily selection. Please ask your server for today's soup. Served with artisan bread",
+          "price": 9.99,
+          "dietary": ["varies"],
+          "allergens": ["varies"],
+          "popular": false
+        }
+      ]
+    },
+    {
+      "name": "Mains",
+      "items": [
+        {
+          "id": "m-001",
+          "name": "28-Day Aged Ribeye Steak",
+          "description": "10oz prime ribeye steak, cooked to your preference, served with hand-cut fries, roasted vine tomatoes, and peppercorn sauce",
+          "price": 42.99,
+          "dietary": ["meat"],
+          "allergens": ["dairy"],
+          "popular": true
+        },
+        {
+          "id": "m-002",
+          "name": "Pan-Seared Salmon",
+          "description": "Atlantic salmon fillet with lemon butter sauce, seasonal vegetables, and crushed new potatoes",
+          "price": 28.99,
+          "dietary": ["seafood"],
+          "allergens": ["fish", "dairy"],
+          "popular": true
+        },
+        {
+          "id": "m-003",
+          "name": "Truffle Mushroom Risotto",
+          "description": "Slow-cooked Arborio rice with wild mushrooms, truffle oil, parmesan, and fresh thyme",
+          "price": 22.99,
+          "dietary": ["vegetarian"],
+          "allergens": ["dairy"],
+          "popular": true
+        },
+        {
+          "id": "m-004",
+          "name": "Vegan Thai Green Curry",
+          "description": "Fragrant coconut milk curry with tofu, seasonal vegetables, bamboo shoots, served with jasmine rice",
+          "price": 19.99,
+          "dietary": ["vegan", "gluten-free"],
+          "allergens": ["soy", "nuts"],
+          "popular": false
+        },
+        {
+          "id": "m-005",
+          "name": "Free-Range Chicken Supreme",
+          "description": "Herb-marinated chicken breast with dauphinoise potatoes, fine beans, and tarragon jus",
+          "price": 26.99,
+          "dietary": ["meat"],
+          "allergens": ["dairy"],
+          "popular": false
+        },
+        {
+          "id": "m-006",
+          "name": "Lobster Linguine",
+          "description": "Fresh linguine with half Boston lobster, cherry tomatoes, white wine, garlic, and fresh herbs",
+          "price": 38.99,
+          "dietary": ["seafood"],
+          "allergens": ["gluten", "shellfish"],
+          "popular": true
+        },
+        {
+          "id": "m-007",
+          "name": "Lamb Shank",
+          "description": "Slow-braised lamb shank with red wine jus, minted pea purée, roasted root vegetables, and rosemary mash",
+          "price": 32.99,
+          "dietary": ["meat"],
+          "allergens": ["dairy"],
+          "popular": false
+        }
+      ]
+    },
+    {
+      "name": "Sides",
+      "items": [
+        { "id": "si-001", "name": "Hand-Cut Fries", "price": 5.99, "dietary": ["vegan"] },
+        { "id": "si-002", "name": "Truffle Parmesan Fries", "price": 7.99, "dietary": ["vegetarian"], "allergens": ["dairy"] },
+        { "id": "si-003", "name": "Seasonal Greens", "price": 5.99, "dietary": ["vegan"] },
+        { "id": "si-004", "name": "Mac & Cheese", "price": 7.99, "dietary": ["vegetarian"], "allergens": ["gluten", "dairy"] },
+        { "id": "si-005", "name": "Roasted Garlic Bread", "price": 4.99, "dietary": ["vegetarian"], "allergens": ["gluten", "dairy"] }
+      ]
+    },
+    {
+      "name": "Desserts",
+      "items": [
+        {
+          "id": "d-001",
+          "name": "Chocolate Fondant",
+          "description": "Warm dark chocolate fondant with molten center, served with vanilla ice cream and raspberry coulis",
+          "price": 11.99,
+          "dietary": ["vegetarian"],
+          "allergens": ["gluten", "egg", "dairy"],
+          "popular": true
+        },
+        {
+          "id": "d-002",
+          "name": "Crème Brûlée",
+          "description": "Classic French vanilla custard with caramelized sugar crust, served with shortbread biscuit",
+          "price": 10.99,
+          "dietary": ["vegetarian"],
+          "allergens": ["egg", "dairy", "gluten"],
+          "popular": false
+        },
+        {
+          "id": "d-003",
+          "name": "Vegan Mango Sorbet",
+          "description": "Three scoops of house-made mango sorbet with fresh tropical fruit salad",
+          "price": 9.99,
+          "dietary": ["vegan", "gluten-free"],
+          "allergens": [],
+          "popular": false
+        }
+      ]
+    },
+    {
+      "name": "Cocktails",
+      "items": [
+        { "id": "c-001", "name": "Kalai Signature Mojito", "description": "White rum, fresh lime, mint, elderflower, soda", "price": 13.99 },
+        { "id": "c-002", "name": "Espresso Martini", "description": "Vodka, Kahlúa, freshly brewed espresso, vanilla syrup", "price": 14.99 },
+        { "id": "c-003", "name": "Passion Fruit Daiquiri", "description": "Rum, passion fruit purée, lime juice, sugar syrup", "price": 13.99 },
+        { "id": "c-004", "name": "Virgin Mojito", "description": "Alcohol-free. Fresh lime, mint, elderflower, soda water", "price": 7.99 }
+      ]
+    },
+    {
+      "name": "Set Menus",
+      "items": [
+        {
+          "id": "set-001",
+          "name": "Tuesday Tasting Menu",
+          "description": "3 courses — choose one starter, one main, and one dessert from a curated selection. Available every Tuesday.",
+          "price": 35.00,
+          "availability": "Tuesday only"
+        },
+        {
+          "id": "set-002",
+          "name": "Weekend Brunch",
+          "description": "Two courses from our brunch menu. Bottomless Prosecco or mimosas add-on available for $20 per person (90-minute limit).",
+          "price": 25.00,
+          "availability": "Saturday-Sunday 10:00 AM - 3:00 PM"
+        },
+        {
+          "id": "set-003",
+          "name": "Business Lunch",
+          "description": "2 courses with still/sparkling water and coffee included. Quick service guaranteed within 60 minutes.",
+          "price": 28.00,
+          "availability": "Monday-Friday 12:00 PM - 3:00 PM"
+        }
+      ]
+    }
+  ]
+}
