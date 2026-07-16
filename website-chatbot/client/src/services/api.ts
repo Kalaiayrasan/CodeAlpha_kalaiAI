@@ -8,7 +8,7 @@ export const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 30000,
+  timeout: 5000, // short timeout so demo fallback kicks in quickly on static hosting
 });
 
 // ── Request interceptor: attach JWT ──────────────────────────────────────────
