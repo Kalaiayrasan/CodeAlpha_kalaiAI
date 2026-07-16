@@ -62,6 +62,10 @@ export function useAdmin(): UseAdminReturn {
   const [error, setError] = useState<string | null>(null);
 
   // ── Auth ──────────────────────────────────────────────────────────────────
+  // Demo credentials for offline / GitHub Pages mode (no backend needed)
+  const DEMO_EMAIL = 'admin@kalairestaurant.com';
+  const DEMO_PASSWORD = 'Admin@123456';
+
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     setError(null);
@@ -73,7 +77,25 @@ export function useAdmin(): UseAdminReturn {
       toast.success('Welcome back!');
       return true;
     } catch (err: unknown) {
-      const msg = (err as { response?: { data?: { message?: string } } }).response?.data?.message || 'Login failed';
+      // ── Offline / demo fallback ──────────────────────────────────────────
+      // If the backend is unreachable (static hosting like GitHub Pages),
+      // fall back to demo credentials so the admin UI is still viewable.
+      const isNetworkError =
+        !(err as { response?: unknown }).response; // no HTTP response → network/CORS error
+
+      if (isNetworkError && email === DEMO_EMAIL && password === DEMO_PASSWORD) {
+        const demoToken = 'demo-offline-token';
+        const demoUser = { username: 'admin', email: DEMO_EMAIL, role: 'superadmin' };
+        localStorage.setItem(TOKEN_KEY, demoToken);
+        localStorage.setItem(USER_KEY, JSON.stringify(demoUser));
+        setAuth({ token: demoToken, user: demoUser, isAuthenticated: true });
+        toast.success('Demo mode — backend not connected');
+        return true;
+      }
+      // ────────────────────────────────────────────────────────────────────
+      const msg =
+        (err as { response?: { data?: { message?: string } } }).response?.data?.message ||
+        'Login failed. Check credentials or backend connection.';
       setError(msg);
       toast.error(msg);
       return false;
