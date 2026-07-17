@@ -75,6 +75,14 @@ app.use(morgan('combined', { stream: { write: (msg) => logger.info(msg.trim()) }
 app.use(globalLimiter);
 
 // ─── API Routes ───────────────────────────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Kalai Chatbot Server is online and running successfully!",
+    healthCheck: "/api/health"
+  });
+});
+
 app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
