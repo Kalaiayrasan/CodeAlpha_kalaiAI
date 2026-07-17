@@ -17,7 +17,7 @@ const embeddingCache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 const BATCH_SIZE = 100;
 
 /** Embedding model to use */
-const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || 'text-embedding-3-small';
+const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || process.env.OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small';
 
 /** Dimensions for the chosen model (3-small = 1536) */
 const EMBEDDING_DIMENSIONS = parseInt(process.env.EMBEDDING_DIMENSIONS || '1536', 10);
@@ -38,7 +38,8 @@ function getClient() {
     throw new Error('OPENAI_API_KEY environment variable is not set. Embedding service requires OpenAI.');
   }
 
-  client = new OpenAI({ apiKey });
+  const baseURL = process.env.OPENAI_BASE_URL || undefined;
+  client = new OpenAI({ apiKey, baseURL });
   return client;
 }
 

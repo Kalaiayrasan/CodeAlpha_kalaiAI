@@ -51,7 +51,8 @@ function getOpenAIClient() {
     throw new Error('OPENAI_API_KEY environment variable is not set');
   }
 
-  openaiClient = new OpenAI({ apiKey });
+  const baseURL = process.env.OPENAI_BASE_URL || undefined;
+  openaiClient = new OpenAI({ apiKey, baseURL });
   return openaiClient;
 }
 
@@ -63,7 +64,7 @@ function getOpenAIClient() {
  */
 async function generateWithOpenAI(messages, contextChunks) {
   const client = getOpenAIClient();
-  const model = process.env.OPENAI_CHAT_MODEL || 'gpt-4o-mini';
+  const model = process.env.OPENAI_CHAT_MODEL || process.env.OPENAI_MODEL || 'gpt-4o-mini';
   const systemPrompt = buildSystemPrompt(contextChunks);
 
   const systemMessage = { role: 'system', content: systemPrompt };
