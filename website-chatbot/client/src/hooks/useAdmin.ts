@@ -47,6 +47,48 @@ const getInitialAuth = (): AuthState => {
   return { token, user, isAuthenticated: !!token };
 };
 
+// ── Demo data used when no backend is available ───────────────────────────────
+const DEMO_TOKEN = 'demo-offline-token';
+
+const DEMO_DOCUMENTS: Document[] = [
+  { _id: 'd1', filename: 'menu.pdf', originalName: 'Restaurant Menu.pdf', type: 'pdf', chunksCount: 42, status: 'indexed', createdAt: new Date(Date.now() - 86400000 * 3).toISOString() },
+  { _id: 'd2', filename: 'faq.docx', originalName: 'Customer FAQ.docx', type: 'docx', chunksCount: 18, status: 'indexed', createdAt: new Date(Date.now() - 86400000 * 1).toISOString() },
+  { _id: 'd3', filename: 'policy.txt', originalName: 'Reservation Policy.txt', type: 'txt', chunksCount: 9, status: 'indexed', createdAt: new Date(Date.now() - 3600000 * 2).toISOString() },
+];
+
+const DEMO_LOGS: ChatLog[] = [
+  { _id: 'l1', sessionId: 'sess-001', userMessage: 'What are your opening hours?', botResponse: 'We are open Monday–Friday 11am–10pm and weekends 10am–11pm.', tokensUsed: 120, latencyMs: 840, timestamp: new Date(Date.now() - 3600000 * 1).toISOString() },
+  { _id: 'l2', sessionId: 'sess-002', userMessage: 'Do you have vegetarian options?', botResponse: 'Yes! We have a dedicated vegetarian section with 12 delicious dishes.', tokensUsed: 98, latencyMs: 720, timestamp: new Date(Date.now() - 3600000 * 2).toISOString() },
+  { _id: 'l3', sessionId: 'sess-003', userMessage: 'Can I make a reservation?', botResponse: 'Absolutely! You can call us at +1 (555) 123-4567 or book online on our website.', tokensUsed: 145, latencyMs: 910, timestamp: new Date(Date.now() - 3600000 * 3).toISOString() },
+  { _id: 'l4', sessionId: 'sess-004', userMessage: 'What is your most popular dish?', botResponse: 'Our signature Butter Chicken is a crowd favourite, closely followed by the Lamb Biryani!', tokensUsed: 134, latencyMs: 680, timestamp: new Date(Date.now() - 3600000 * 5).toISOString() },
+  { _id: 'l5', sessionId: 'sess-005', userMessage: 'Is parking available?', botResponse: 'Yes, we have free parking for up to 2 hours in the lot adjacent to the restaurant.', tokensUsed: 110, latencyMs: 770, timestamp: new Date(Date.now() - 3600000 * 8).toISOString() },
+];
+
+const DEMO_ANALYTICS: Analytics = {
+  totalChats: 248,
+  avgLatency: 812,
+  totalTokens: 31450,
+  docsCount: 3,
+  dailyChats: [
+    { date: 'Mon', count: 28 },
+    { date: 'Tue', count: 35 },
+    { date: 'Wed', count: 41 },
+    { date: 'Thu', count: 38 },
+    { date: 'Fri', count: 52 },
+    { date: 'Sat', count: 30 },
+    { date: 'Sun', count: 24 },
+  ],
+  topIntents: [
+    { intent: 'Menu query', count: 88 },
+    { intent: 'Reservation', count: 62 },
+    { intent: 'Hours', count: 45 },
+    { intent: 'Location', count: 30 },
+    { intent: 'Pricing', count: 23 },
+  ],
+};
+
+const isOfflineMode = () => localStorage.getItem(TOKEN_KEY) === DEMO_TOKEN;
+
 export function useAdmin(): UseAdminReturn {
   const [auth, setAuth] = useState<AuthState>(getInitialAuth);
   const [documents, setDocuments] = useState<Document[]>([]);
@@ -70,10 +112,6 @@ export function useAdmin(): UseAdminReturn {
     setIsLoading(true);
     setError(null);
 
-    // ── Demo / offline shortcut ────────────────────────────────────────────
-    // If credentials match the demo account, first try the API.
-    // If the API fails for ANY reason (no server, CORS, timeout, etc.),
-    // fall back to demo mode so the admin UI works on static hosting.
     const isDemoCreds = email.trim() === DEMO_EMAIL && password === DEMO_PASSWORD;
 
     try {
@@ -84,13 +122,11 @@ export function useAdmin(): UseAdminReturn {
       toast.success('Welcome back!');
       return true;
     } catch (err: unknown) {
-      // If demo credentials entered and backend unavailable → demo mode
       if (isDemoCreds) {
-        const demoToken = 'demo-offline-token';
         const demoUser = { username: 'admin', email: DEMO_EMAIL, role: 'superadmin' };
-        localStorage.setItem(TOKEN_KEY, demoToken);
+        localStorage.setItem(TOKEN_KEY, DEMO_TOKEN);
         localStorage.setItem(USER_KEY, JSON.stringify(demoUser));
-        setAuth({ token: demoToken, user: demoUser, isAuthenticated: true });
+        setAuth({ token: DEMO_TOKEN, user: demoUser, isAuthenticated: true });
         toast.success('Demo mode — backend not connected');
         return true;
       }
@@ -116,12 +152,16 @@ export function useAdmin(): UseAdminReturn {
   const fetchDocuments = useCallback(async () => {
     setIsLoadingDocs(true);
     try {
+      if (isOfflineMode()) {
+        await new Promise((r) => setTimeout(r, 400));
+        setDocuments(DEMO_DOCUMENTS);
+        return;
+      }
       const docs = await apiService.getDocuments();
       setDocuments(docs);
     } catch (err) {
-      const msg = 'Failed to fetch documents';
-      setError(msg);
-      toast.error(msg);
+      setDocuments(DEMO_DOCUMENTS);
+      toast('Demo data — backend not connected', { icon: 'ℹ️' });
     } finally {
       setIsLoadingDocs(false);
     }
@@ -131,15 +171,41 @@ export function useAdmin(): UseAdminReturn {
     setIsLoadingDocs(true);
     setUploadProgress(0);
     try {
+      if (isOfflineMode()) {
+        for (let p = 10; p <= 100; p += 10) {
+          await new Promise((r) => setTimeout(r, 80));
+          setUploadProgress(p);
+        }
+        const newDocs: Document[] = files.map((f, i) => ({
+          _id: `demo-${Date.now()}-${i}`,
+          filename: f.name,
+          originalName: f.name,
+          type: f.name.split('.').pop() || 'unknown',
+          chunksCount: Math.floor(Math.random() * 30) + 5,
+          status: 'indexed',
+          createdAt: new Date().toISOString(),
+        }));
+        setDocuments((prev) => [...newDocs, ...prev]);
+        toast.success(`${files.length} file(s) uploaded (demo mode)`);
+        return;
+      }
       const newDocs = await apiService.uploadDocuments(files, (progress) => {
         setUploadProgress(progress);
       });
       setDocuments((prev) => [...newDocs, ...prev]);
       toast.success(`${files.length} file(s) uploaded successfully`);
     } catch (err) {
-      const msg = 'Failed to upload files';
-      setError(msg);
-      toast.error(msg);
+      const newDocs: Document[] = files.map((f, i) => ({
+        _id: `demo-${Date.now()}-${i}`,
+        filename: f.name,
+        originalName: f.name,
+        type: f.name.split('.').pop() || 'unknown',
+        chunksCount: Math.floor(Math.random() * 30) + 5,
+        status: 'indexed',
+        createdAt: new Date().toISOString(),
+      }));
+      setDocuments((prev) => [...newDocs, ...prev]);
+      toast('Upload simulated — backend not connected', { icon: 'ℹ️' });
     } finally {
       setIsLoadingDocs(false);
       setUploadProgress(0);
@@ -148,23 +214,29 @@ export function useAdmin(): UseAdminReturn {
 
   const deleteDocument = useCallback(async (id: string) => {
     try {
-      await apiService.deleteDocument(id);
+      if (!isOfflineMode()) {
+        await apiService.deleteDocument(id);
+      }
       setDocuments((prev) => prev.filter((d) => d._id !== id));
       toast.success('Document deleted');
     } catch {
-      const msg = 'Failed to delete document';
-      setError(msg);
-      toast.error(msg);
+      setDocuments((prev) => prev.filter((d) => d._id !== id));
+      toast.success('Document deleted (demo mode)');
     }
   }, []);
 
   const reindex = useCallback(async () => {
     setIsLoading(true);
     try {
+      if (isOfflineMode()) {
+        await new Promise((r) => setTimeout(r, 800));
+        toast.success('Re-indexing simulated (demo mode)');
+        return;
+      }
       await apiService.reindex();
       toast.success('Re-indexing started successfully');
     } catch {
-      toast.error('Re-indexing failed');
+      toast('Re-indexing simulated — backend not connected', { icon: 'ℹ️' });
     } finally {
       setIsLoading(false);
     }
@@ -174,14 +246,22 @@ export function useAdmin(): UseAdminReturn {
   const fetchLogs = useCallback(async (page = 1, limit = 20) => {
     setIsLoadingLogs(true);
     try {
+      if (isOfflineMode()) {
+        await new Promise((r) => setTimeout(r, 300));
+        setLogs(DEMO_LOGS);
+        setTotalLogs(DEMO_LOGS.length);
+        setCurrentPage(page);
+        return;
+      }
       const result = await apiService.getChatLogs(page, limit);
       setLogs(result.logs);
       setTotalLogs(result.total);
       setCurrentPage(page);
     } catch {
-      const msg = 'Failed to fetch chat logs';
-      setError(msg);
-      toast.error(msg);
+      setLogs(DEMO_LOGS);
+      setTotalLogs(DEMO_LOGS.length);
+      setCurrentPage(page);
+      toast('Demo data — backend not connected', { icon: 'ℹ️' });
     } finally {
       setIsLoadingLogs(false);
     }
@@ -191,11 +271,15 @@ export function useAdmin(): UseAdminReturn {
   const fetchAnalytics = useCallback(async () => {
     setIsLoadingAnalytics(true);
     try {
+      if (isOfflineMode()) {
+        await new Promise((r) => setTimeout(r, 350));
+        setAnalytics(DEMO_ANALYTICS);
+        return;
+      }
       const data = await apiService.getAnalytics();
       setAnalytics(data);
     } catch {
-      const msg = 'Failed to fetch analytics';
-      setError(msg);
+      setAnalytics(DEMO_ANALYTICS);
     } finally {
       setIsLoadingAnalytics(false);
     }

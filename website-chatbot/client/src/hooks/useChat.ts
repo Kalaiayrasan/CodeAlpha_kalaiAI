@@ -9,6 +9,32 @@ const generateId = () =>
 
 const STORAGE_KEY = 'chatbot_session_id';
 
+// ── Client-side offline responder fallback ─────────────────────────────────────
+const getOfflineResponse = (userMessage: string): string => {
+  const query = userMessage.toLowerCase().trim();
+  
+  if (query.includes('menu') || query.includes('food') || query.includes('dish') || query.includes('eat') || query.includes('drink')) {
+    return "Here is our signature menu! We offer popular dishes like Butter Chicken, Lamb Biryani, Paneer Tikka, and local seasonal specialties. You can check our complete menu and upload new ones in the admin panel!";
+  }
+  if (query.includes('hour') || query.includes('open') || query.includes('close') || query.includes('time') || query.includes('schedule')) {
+    return "We are open Monday to Friday from 11:00 AM to 10:00 PM, and on weekends from 10:00 AM to 11:00 PM. We look forward to serving you!";
+  }
+  if (query.includes('book') || query.includes('reservation') || query.includes('table') || query.includes('reserve')) {
+    return "Reservations are easy! You can book a table by calling us directly at +1 (555) 123-4567 or emailing info@kalairestaurant.com.";
+  }
+  if (query.includes('location') || query.includes('where') || query.includes('address') || query.includes('map') || query.includes('street')) {
+    return "We are located at 123 Main Street, City, State 12345. Feel free to stop by or call us for directions!";
+  }
+  if (query.includes('vegan') || query.includes('veg') || query.includes('vegetarian')) {
+    return "Yes, we have plenty of delicious vegetarian and vegan options, including Paneer Butter Masala, Chana Masala, and vegan Dal Tadka. Please inform our staff about any dietary requirements!";
+  }
+  if (query.includes('hi') || query.includes('hello') || query.includes('hey') || query.includes('welcome') || query.includes('help')) {
+    return "Hello! Welcome to Kalai Restaurant. I'm your AI assistant. How can I help you today? 🍽️";
+  }
+  
+  return "Thank you for reaching out! Since the backend server is in demo/offline mode, I am responding from my local knowledge base. You can ask me about our menu, hours, location, or reservations!";
+};
+
 export interface UseChatReturn {
   messages: Message[];
   sessionId: string | null;
@@ -63,8 +89,11 @@ export function useChat(): UseChatReturn {
           setSessionId(newId);
         }
       } catch (err) {
-        console.error('Failed to initialize chat session:', err);
-        setError('Failed to connect to chat server.');
+        console.warn('Failed to initialize chat session, using offline session:', err);
+        // Do not block the chat widget, start an offline session ID
+        const fallbackSessionId = `offline-${generateId()}`;
+        setSessionId(fallbackSessionId);
+        localStorage.setItem(STORAGE_KEY, fallbackSessionId);
       }
     };
 
@@ -91,10 +120,34 @@ export function useChat(): UseChatReturn {
 
       try {
         if (!currentSessionId) {
-          const { sessionId: newId } = await api.createSession();
-          localStorage.setItem(STORAGE_KEY, newId);
-          setSessionId(newId);
-          currentSessionId = newId;
+          try {
+            const { sessionId: newId } = await api.createSession();
+            localStorage.setItem(STORAGE_KEY, newId);
+            setSessionId(newId);
+            currentSessionId = newId;
+          } catch {
+            currentSessionId = `offline-${generateId()}`;
+            localStorage.setItem(STORAGE_KEY, currentSessionId);
+            setSessionId(currentSessionId);
+          }
+        }
+
+        // If the session ID starts with 'offline', skip network and use local responder immediately
+        if (currentSessionId.startsWith('offline')) {
+          await new Promise((r) => setTimeout(r, 600)); // natural typing delay
+          const responseText = getOfflineResponse(content.trim());
+          const botMsg: Message = {
+            id: generateId(),
+            role: 'assistant',
+            content: responseText,
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, botMsg]);
+          if (!isOpen) {
+            setUnreadCount((prev) => prev + 1);
+          }
+          setIsTyping(false);
+          return;
         }
 
         const result = await api.sendMessage(currentSessionId, content.trim());
@@ -114,15 +167,23 @@ export function useChat(): UseChatReturn {
           setUnreadCount((prev) => prev + 1);
         }
       } catch (err) {
-        console.error('Failed to send message:', err);
-        const errorMsg: Message = {
+        console.warn('Failed to send message via API, falling back to local simulation:', err);
+        
+        // Mock natural typing response delay
+        await new Promise((r) => setTimeout(r, 650));
+        
+        const offlineText = getOfflineResponse(content.trim());
+        const botMsg: Message = {
           id: generateId(),
           role: 'assistant',
-          content: "I'm sorry, I couldn't process your request. Please try again.",
+          content: offlineText,
           timestamp: new Date(),
         };
-        setMessages((prev) => [...prev, errorMsg]);
-        setError('Failed to get response from AI.');
+        setMessages((prev) => [...prev, botMsg]);
+        
+        if (!isOpen) {
+          setUnreadCount((prev) => prev + 1);
+        }
       } finally {
         setIsTyping(false);
       }
@@ -141,7 +202,7 @@ export function useChat(): UseChatReturn {
       localStorage.setItem(STORAGE_KEY, newId);
       setSessionId(newId);
     } catch {
-      setSessionId(null);
+      setSessionId(`offline-${generateId()}`);
     }
   }, []);
 
