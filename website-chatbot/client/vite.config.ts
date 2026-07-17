@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/CodeAlpha_kalaiAI/',
+  base: process.env.VERCEL ? '/' : '/CodeAlpha_kalaiAI/',
   plugins: [react()],
   server: {
     port: 3000,
